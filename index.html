@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal-Oriented Habit Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="main-content">
+            <header class="app-header">
+                <h1 class="app-title">Goal-Oriented Habit Tracker</h1>
+                <p class="app-subtitle">Define your goals, build your habits, achieve success.</p>
+            </header>
+
+            <!-- Add Goal Form -->
+            <div class="add-goal-form-container">
+                <h2 class="form-title">
+                    <span class="icon-target"><!-- Target SVG --></span> Add New Goal
+                </h2>
+                <div class="form-grid">
+                    <input type="text" id="newGoalName" placeholder="e.g., Learn a new language" class="input-field goal-name-input">
+                    <input type="number" id="newGoalTargetDays" placeholder="Target Days (e.g., 90)" min="1" class="input-field target-days-input">
+                    <button id="addGoalButton" class="button primary-button add-goal-button">
+                        <span class="icon-plus"><!-- Plus SVG --></span> Create Goal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Goal List -->
+            <div id="goalsListContainer">
+                <!-- Goals will be rendered here by JavaScript -->
+            </div>
+            <div id="noGoalsMessage" class="no-items-message" style="display: none;">
+                <span class="icon-target-large"><!-- Target SVG Large --></span>
+                <h2 class="no-items-title">No goals yet!</h2>
+                <p class="no-items-text">Define your first goal above to get started.</p>
+            </div>
+
+            <footer class="app-footer">
+                <p>© <span id="currentYear"></span> Goal-Oriented Habit Tracker. Make progress every day!</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Templates (hidden, for JavaScript to clone) -->
+    <template id="goalItemTemplate">
+        <div class="goal-item" data-goal-id="">
+            <div class="goal-header">
+                <div class="goal-header-main">
+                    <button class="goal-expand-toggle" aria-label="Expand goal">
+                        <span class="icon-chevron-right"><!-- ChevronRight SVG --></span>
+                        <span class="icon-chevron-down" style="display:none;"><!-- ChevronDown SVG --></span>
+                    </button>
+                    <h3 class="goal-name">Goal Name</h3>
+                </div>
+                <div class="goal-header-actions">
+                    <span class="goal-progress-text">0 / 0 days</span>
+                    <button class="button-icon delete-goal-button" aria-label="Delete goal">
+                        <span class="icon-trash"><!-- Trash2 SVG --></span>
+                    </button>
+                </div>
+            </div>
+            <div class="goal-progress-bar-container">
+                <div class="goal-progress-bar"></div>
+            </div>
+            <div class="goal-details" style="display: none;">
+                <!-- Add Habit Form for this Goal -->
+                <div class="add-habit-form">
+                    <h4 class="add-habit-title">Add Habit to "<span class="goal-name-placeholder">Goal Name</span>"</h4>
+                    <div class="add-habit-controls">
+                        <input type="text" class="input-field new-habit-name" placeholder="e.g., Practice for 15 mins">
+                        <button class="button secondary-button add-habit-button">
+                            <span class="icon-plus-small"><!-- Plus SVG Small --></span> Add Habit
+                        </button>
+                    </div>
+                </div>
+                <!-- Habit List for this Goal -->
+                <div class="habit-list">
+                    <!-- Habits will be rendered here -->
+                </div>
+                <div class="no-habits-message" style="display: none;">
+                    <span class="icon-calendar-days"><!-- CalendarDays SVG --></span>
+                    <p>No habits added to this goal yet.</p>
+                    <p class="text-xs">Use the form above to add the first habit.</p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="habitItemTemplate">
+        <div class="habit-item" data-habit-id="">
+            <div class="habit-main-content">
+                <div class="habit-info">
+                    <button class="habit-toggle-completion" aria-label="Mark as complete">
+                        <span class="icon-x-circle"><!-- XCircle SVG --></span>
+                        <span class="icon-check-circle" style="display:none;"><!-- CheckCircle SVG --></span>
+                    </button>
+                    <span class="habit-name">Habit Name</span>
+                </div>
+                <div class="habit-actions">
+                    <div class="habit-streak" title="Current Streak">
+                        <span class="icon-zap"><!-- Zap SVG --></span>
+                        <span class="streak-count">0</span>
+                    </div>
+                    <button class="button-icon view-history-button" aria-label="Show completion history">
+                        <span class="icon-repeat"><!-- Repeat SVG --></span>
+                    </button>
+                    <button class="button-icon delete-habit-button" aria-label="Delete habit">
+                        <span class="icon-trash-small"><!-- Trash2 SVG Small --></span>
+                    </button>
+                </div>
+            </div>
+            <div class="habit-history-details" style="display: none;">
+                <p class="history-meta">Created: <span class="habit-created-at"></span></p>
+                <p class="history-meta">Total completions: <span class="habit-total-completions">0</span></p>
+                <div class="history-list-container">
+                    <ul class="history-list">
+                        <!-- Completion dates will be listed here -->
+                    </ul>
+                </div>
+                <p class="no-completions-message" style="display: none;">No completions yet.</p>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
